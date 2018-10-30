@@ -19,7 +19,7 @@ module Pronto
 
       def message(line)
         path = line.patch.delta.new_file[:path]
-        Message.new(path, line, :error, 'This change has no test coverage', nil, self.class)
+        Message.new(path, line, :error, 'This file misses test coverage', nil, self.class)
       end
 
       def coverage
