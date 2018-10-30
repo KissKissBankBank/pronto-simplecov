@@ -13,8 +13,7 @@ module Pronto
         return unless file_coverage
         patch.added_lines
              .select { |line| file_coverage.line(line.new_lineno).missed? unless file_coverage.line(line.new_lineno).nil? }
-             .map { |line| message(line) }
-             [0...1]
+             .map { |line| message(line) }[0...1]
       end
 
       def message(line)
