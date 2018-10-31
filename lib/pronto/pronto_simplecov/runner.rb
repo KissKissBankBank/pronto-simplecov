@@ -13,9 +13,18 @@ module Pronto
         return unless file_coverage
         messages = patch.added_lines
              .select { |line| file_coverage.line(line.new_lineno).missed? unless file_coverage.line(line.new_lineno).nil? }
-             .map { |line| message(line) }[0...1]
-        messages
+             .map { |line| message(line) }
+        messages_count = messages.count
+        if messages_count > 0
+          path = messages.first.path
+          line = messages.first.line
+          msg = "#{messages_count} lines of this file are not covered"
+          [Message.new(path, line, :error, msg, nil, self.class)]
+        else
+          []
+        end
       end
+
 
       def message(line)
         path = line.patch.delta.new_file[:path]
