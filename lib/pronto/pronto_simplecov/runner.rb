@@ -18,7 +18,7 @@ module Pronto
         if messages_count > 0
           path = messages.first.path
           line = messages.first.line
-          msg = "#{messages_count} lines of this file are not covered"
+          msg = "#{messages_count} lines of this file are not covered below"
           [Message.new(path, line, :error, msg, nil, self.class)]
         else
           []
